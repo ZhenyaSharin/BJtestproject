@@ -1,0 +1,15 @@
+{
+    "name": "sharinev/beejee",
+    "authors": [
+        {
+            "name": "Evgeniy Sharin",
+            "email": "jerrysharin92@gmail.com"
+        }
+    ],
+    "autoload":{
+        "psr-4": {
+            "App\\": "./"
+        }
+    },
+    "require": {}
+}
