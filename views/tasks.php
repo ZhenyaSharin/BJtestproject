@@ -66,7 +66,7 @@
                     <form method="POST" action="/taskget">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Student name:</label>
-                            <input class="form-control" type="text" placeholder="Firstname Lastname" name="name" required>
+                            <input class="form-control" type="text" placeholder="<?php echo($name) ;?>" name="name" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Email address:</label>

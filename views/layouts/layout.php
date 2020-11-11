@@ -61,16 +61,16 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="">
+                    <form action="/login" method="POST">
                         <div class="modal-body">
                             <div class="form-group td-center">
                                 <label class="login-title" for="exampleInputEmail1">Login:</label>
-                                <input type="login" class="form-control txt-center" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter login">
+                                <input type="login" class="form-control txt-center" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter login" required>
                                 <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                             </div>
                             <div class="form-group td-center">
                                 <label class="login-title" for="exampleInputPassword1">Password:</label>
-                                <input type="password" class="form-control txt-center" id="exampleInputPassword1" placeholder="Password">
+                                <input type="password" class="form-control txt-center" id="exampleInputPassword1" placeholder="Password" required>
                             </div>
                         </div>
                         <div class="modal-footer">
