@@ -9,6 +9,6 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return $this->render('admin', $params);
+        return $this->render('admin');
     }
 }

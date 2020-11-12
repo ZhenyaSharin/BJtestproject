@@ -63,7 +63,7 @@
                 </h3>
                 <br>
                 <div class="create-field p-3">
-                    <form method="POST" action="/taskget">
+                    <form method="POST" action="/tasks">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Student name:</label>
                             <input class="form-control" type="text" placeholder="<?php echo($name) ;?>" name="name" required>
@@ -74,7 +74,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Task's text:</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" maxlength="255" name="task" required></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" maxlength="255" name="text" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg">
                             <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Save

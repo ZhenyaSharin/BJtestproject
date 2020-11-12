@@ -5,11 +5,30 @@ namespace App\models;
 use App\core\Model;
 
 
-class Task extends Model
+class Tasks extends Model
 {
-    
-    function __construct(argument)
+    // public int $id;
+    public string $name;
+    public string $email;
+    public string $text;
+    // public string $createdAt;
+    // public string $removed;
+    // public string $updated;
+    // public string $completed;
+
+    public function data()
     {
-        # code...
+        echo "task data";
+    }
+
+    public function rules():array
+    {
+        return [
+            // "id" => [self::RULE_REQUIRED],
+            "name" => [self::RULE_REQUIRED],
+            "email" => [self::RULE_REQUIRED, self::RULE_EMAIL],
+            "text" => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 3], [self::RULE_MAX, 'max' => 255]],
+            // "createdAt" => [self::RULE_REQUIRED]
+        ];
     }
 }

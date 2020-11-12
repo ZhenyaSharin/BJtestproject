@@ -11,13 +11,13 @@ use App\core\Application;
 
 $app = new Application(dirname(__DIR__));
 
-$app->router->get('/', [TaskController::class, 'index']);
+$app->router->get('/tasks', [TaskController::class, 'index']);
 
 $app->router->get('/login', [AuthController::class, 'login']);
 
 $app->router->get('/admin', [AdminController::class, 'index']);
 
-$app->router->post('/taskget', [TaskController::class, 'data']);
+$app->router->post('/tasks', [TaskController::class, 'index']);
 
 $app->router->post('/login', [AuthController::class, 'login']);
 

@@ -14,10 +14,9 @@ class AuthController extends Controller
         $loginModel = new Login();
         if ($request->isPost()) {
             $loginModel->loadData($request->getBody());
-            if (($loginModel->validate()) && ($loginModel->logIn())) {
+            if ($loginModel->validate() && $loginModel->logIn()) {
                 return 'Success';
             }
-            
         }
 
         return $this->render('login', [
