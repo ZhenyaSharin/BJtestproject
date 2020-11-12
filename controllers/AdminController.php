@@ -7,5 +7,8 @@ use App\core\Controller;
 
 class AdminController extends Controller
 {
-    # code...
+    public function index()
+    {
+        return $this->render('admin', $params);
+    }
 }
