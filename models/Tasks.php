@@ -3,6 +3,7 @@
 namespace App\models;
 
 use App\core\Model;
+use App\core\Application;
 
 
 class Tasks extends Model
@@ -18,7 +19,15 @@ class Tasks extends Model
 
     public function data()
     {
-        echo "task data";
+        // try {
+            $db = Application::$app->db;
+            $stmt = $db->pdo->prepare('SELECT * FROM "GetAllTasks"()');
+            $stmt->execute();
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            return $result;
+        // } catch {
+        //     echo "Database Error";
+        // }
     }
 
     public function rules():array

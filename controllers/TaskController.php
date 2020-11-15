@@ -9,20 +9,23 @@ use App\models\Tasks;
 
 class TaskController extends Controller
 {
+
     public function index(Request $request)
     {
-        $taskModel = new Tasks();
-
+        $tasks = new Tasks();
 
         if ($request->isPost()) {
-            $taskModel->loadData($request->getBody());
-            if (($taskModel->validate()) && ($taskModel->data())) {
-                return 'Success';
-            }
+            $tasks->loadData($request->getBody());
+            if (($tasks->validate()) && ($tasks->data())) {
+                var_dump($tasks->data());
+            } 
         }
+        $tableData = $tasks->data();
+
         $params = [
-            'model' => $taskModel
+            'table' => $tableData
         ];
+
         return $this->render('tasks', $params);
     }
 

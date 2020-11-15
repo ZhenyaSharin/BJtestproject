@@ -17,6 +17,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach ($params['table'] as $item): ?>
                         <tr>
                             <th scope="row">1</th>
                             <td>Mark One</td>
@@ -26,34 +27,7 @@
                                 Completed
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton@gmail.com</td>
-                            <td>fat</td>
-                            <td class="td-center"></td>
-                        </tr>
-                        <tr>
-                        <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>theBird@gmail.com</td>
-                            <td>twitter</td>
-                            <td class="td-center"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton@gmail.com</td>
-                            <td>fat</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                        <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>theBird@gmail.com</td>
-                            <td>twitter</td>
-                            <td class="td-center"></td>
-                        </tr>
+                        <?php endforeach;?>
                     </tbody>
                 </table>
             </div>
@@ -63,18 +37,27 @@
                 </h3>
                 <br>
                 <div class="create-field p-3">
-                    <form method="POST" action="/tasks">
+                    <form method="POST" action="/">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Student name:</label>
-                            <input class="form-control" type="text" placeholder="<?php echo($name) ;?>" name="name" required>
+                            <input class="form-control <?php echo $model->hasError('name') ? 'is-invalid' : '';?>" type="text" placeholder="Firstname Surname" name="name">
+                            <div class="invalid-feedback">
+                                <?php echo $model->getFirstError('name'); ;?>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Email address:</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="email" required>
+                            <input type="text" class="form-control <?php echo $model->hasError('email') ? 'is-invalid' : '';?>" id="exampleFormControlInput1" placeholder="name@example.com" name="email">
+                            <div class="invalid-feedback">
+                                <?php echo $model->getFirstError('email'); ;?>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Task's text:</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" maxlength="255" name="text" required></textarea>
+                            <textarea class="form-control <?php echo $model->hasError('text') ? 'is-invalid' : '';?>" id="exampleFormControlTextarea1" rows="4" maxlength="255" name="text"></textarea>
+                            <div class="invalid-feedback">
+                                <?php echo $model->getFirstError('text'); ;?>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg">
                             <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Save
