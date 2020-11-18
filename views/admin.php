@@ -21,17 +21,36 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach ($params["table"] as $item) :?>
                         <tr class="row-point">
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                            <th scope="row"><?php echo($item["Id"]);?></th>
+                            <td><?php echo($item["Name"]);?></td>
+                            <td><?php echo($item["Email"]);?></td>
+                            <td><?php echo($item["Text"]);?></td>
                             <td>
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg">Change</button>
-                                <button type="button" class="btn btn-success btn-sm">Complete</button>
+                                <div class="d-flex align-items-center">
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                        Change
+                                    </button>
+                                    <?php if (empty($item["Completed"])) :?>
+                                    <form class="m-0 p-0 mx-2" action="/completetask" method="POST">
+                                        <input type="hidden" name="Id" value="$item['Id']">
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            Complete
+                                        </button>
+                                    </form>
+                                    <?php else :?>
+                                    <button type="button" class="btn btn-secondary btn-sm mx-2" disabled>
+                                        Completed
+                                    </button>
+                                    <?php endif ;?>
+                                    
+                                    <?php echo(!empty($item["Updated_at"]) ? '<span class="td-updated">Updated...</span>' : '') ;?>
+                                </div>
                             </td>
                         </tr>
-                        <tr class="row-point">
+                        <?php endforeach ;?>
+<!--                         <tr class="row-point">
                             <th scope="row">2</th>
                             <td>Jacob</td>
                             <td>Thornton</td>
@@ -49,7 +68,7 @@
                             <td>
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg">Change</button>
                                 <button type="button" class="btn btn-secondary btn-sm" disabled>Completed</button>
-                            </td>
+                            </td> -->
                         </tr>
                     </tbody>
                 </table>
@@ -78,7 +97,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">New task's text:</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" maxlength="255" required></textarea>
+                                    <textarea class="form-control <?php echo($model->hasError('name') ? 'is-invalid' : '');?>" id="exampleFormControlTextarea1" rows="4" maxlength="255" name="new_text" required></textarea>
                                 </div>
                             </div>
                             <div class="modal-footer">

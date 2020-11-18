@@ -1,4 +1,8 @@
-<!doctype html>
+<?php
+
+use App\core\Application;
+
+;?>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -31,7 +35,9 @@
         <header>
             <nav class="navbar navbar-dark bg-dark">
                 <div class="container">
-                    <a class="navbar-brand" href="/">Tasks</a>
+                    <a class="navbar-brand" href="/">
+                        Tasks
+                    </a>
                     
                     <form class="form-inline my-2 my-lg-0">
                         <a href="/login" class="btn btn-outline-success my-2 my-sm-0">
@@ -43,6 +49,11 @@
         </header>
         <div class="container">
             <br>
+            <?php if (Application::$app->session->getFlash('success')): ?>
+            <div class="alert alert-success">
+                <?php echo(Application::$app->session->getFlash('success'));?>;
+            </div>
+            <?php endif ;?>
             {{ content }}
         </div>
         <footer class="foot">

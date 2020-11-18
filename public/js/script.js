@@ -3,7 +3,7 @@ $(document).ready(function() {
         $('#task-table').DataTable({
             columnDefs: [
                 { 
-                    "targets": [ 0, 4    ],
+                    "targets": [ 0, 4 ],
                     "orderable": false,
                 }
             ],
@@ -14,7 +14,5 @@ $(document).ready(function() {
         });
     // };
     // dTables();
-
-    console.log('sefsef');
 
 });

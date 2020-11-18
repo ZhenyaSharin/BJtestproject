@@ -21,7 +21,7 @@
     padding: 0 2px;
 }
 
-.td-completed {
+.th-completed {
     max-width: 80px;
 }
 
@@ -44,4 +44,13 @@
 
 .txt-left {
     text-align: left;
+}
+
+.td-completed {
+    background-color: #dcdcdc;
+    font-weight: bold;
+}
+
+.td-updated {
+    color: #A9A9A9;
 }

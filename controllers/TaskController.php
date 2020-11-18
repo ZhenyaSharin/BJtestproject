@@ -23,7 +23,8 @@ class TaskController extends Controller
         $tableData = $tasks->data();
 
         $params = [
-            'table' => $tableData
+            'table' => $tableData,
+            'model' => $tasks
         ];
 
         return $this->render('tasks', $params);

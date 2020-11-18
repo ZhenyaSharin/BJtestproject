@@ -13,19 +13,22 @@
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Task</th>
-                            <th scope="col" class="td-completed">Status</th>
+                            <th scope="col" class="th-completed">Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($params['table'] as $item): ?>
+                        <?php foreach ($params['table'] as $item) :?>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mark One</td>
-                            <td>otto@gmail.com</td>
-                            <td>mdo</td>
-                            <td class="td-center">
-                                Completed
-                            </td>
+                            <th scope="row"><?php echo($item['Id']);?></th>
+                            <td><?php echo($item['Name']);?></td>
+                            <td><?php echo($item['Email']);?></td>
+                            <td><?php echo($item['Text']);?></td>
+                            <!-- <td class="td-center">Completed</td> -->
+                            <?php if (empty($item['Completed'])) :?>
+                            <td>Not completed</td>
+                            <?php else :?>
+                            <td class="td-center td-completed">Completed</td>
+                            <?php endif ;?>
                         </tr>
                         <?php endforeach;?>
                     </tbody>

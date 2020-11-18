@@ -12,7 +12,7 @@
             <div class="form-group td-center">
                 <label class="login-title" for="exampleInputPassword1">Password:</label>
                 <input type="password" class="form-control <?php echo $model->hasError('password') ? 'is-invalid' : '';?> txt-center" id="exampleInputPassword1" placeholder="Password" name="password">
-                <div class="invalid-feedback" style="text-align: start;">
+                <div class="invalid-feedback">
                     <?php echo $model->getFirstError('password'); ;?>
                 </div>
             </div>

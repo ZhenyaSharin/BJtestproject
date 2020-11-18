@@ -12,7 +12,7 @@ $dotenv->load();
 
 $config = [
     'db' => [
-        'dsn' => $_ENV['DB_DSN'],
+        // 'dsn' => $_ENV['DB_DSN'],
         'connection' => $_ENV['DB_CONNECTION'],
         'host' => $_ENV['DB_HOST'],
         'port' => $_ENV['DB_PORT'],
@@ -30,7 +30,7 @@ $app->router->get('/login', [AuthController::class, 'login']);
 
 $app->router->get('/admin', [AdminController::class, 'index']);
 
-$app->router->post('/', [TaskController::class, 'index']);
+$app->router->post('/tasks', [TaskController::class, 'index']);
 
 $app->router->post('/login', [AuthController::class, 'login']);
 
