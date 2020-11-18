@@ -18,14 +18,14 @@ class Login extends Model
         if (!$user) {
             $this->addError("login", "User does not exist with this login");
             return false;
-        } if (!password_verify($this->login, false)) {
+        } if (!password_verify($this->password, $user->password)) {
             $this->addError('password', 'Password is incorrect. Please, try again...');
             return false;
         }
         echo "<pre>";
-        var_dump($user);    
+        var_dump($user->password);    
         echo "</pre>";
-        return Application::$app->login($user);
+        // return Application::$app->login($user);
     }
 
     public function rules():array

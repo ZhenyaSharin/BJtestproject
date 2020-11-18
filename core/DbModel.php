@@ -32,9 +32,9 @@ abstract class DbModel extends Model
         $stmt->bindValue(":login", $data['login']);
         $stmt->execute();
         $result = $stmt->fetchObject(static::class);
-        // echo "<pre>";
-        // var_dump($result);
-        // echo "</pre>";
+        echo "<pre>";
+        var_dump($result);
+        echo "</pre>";
         return $result;
     }
 } 
