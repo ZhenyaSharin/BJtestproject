@@ -5,34 +5,61 @@ namespace App\controllers;
 use App\core\Controller;
 use App\core\Application;
 use App\core\Request;
+use App\core\Response;
 use App\models\Tasks;
 
 class TaskController extends Controller
 {
-
-    public function index(Request $request)
+    public $task;
+    public function index(Request $request, Response $response)
     {
-        $tasks = new Tasks();
+        $this->task = new Tasks();
+
+        $success = '';
+
+        $tableData = $this->task->data();
 
         if ($request->isPost()) {
-            $tasks->loadData($request->getBody());
-            if (($tasks->validate()) && ($tasks->data())) {
-                var_dump($tasks->data());
+            $this->task->loadData($request->getBody());
+            if (($this->task->validate()) && ($this->task->data())) {
+                $this->task->addNewTask($request->getBody());
+                $success = 'success';
             } 
         }
-        $tableData = $tasks->data();
 
         $params = [
             'table' => $tableData,
-            'model' => $tasks
+            'model' => $this->task,
+            'status' => $success
         ];
 
         return $this->render('tasks', $params);
     }
 
-    public function data(Request $request)
-    {
-        $body = $request->getBody();
-        return "Some Fg Data";
-    }
+    // public function data(Request $request)
+    // {
+    //     $body = $request->getBody();
+    //     return "Some Fg Data";
+    // }
+
+    // public function newTask(Request $request, Response $response)
+    // {
+    //     $this->task = new Tasks;
+    //     $data = $request->getBody();
+    //     if ($request->isPost()) {
+    //         $this->task->loadData($data);
+    //         if ($this->task->validate() && $this->task->addNewTask($data)) {
+    //             $response->redirect('/');
+    //             return; 
+    //         } 
+    //     }
+    //     $tableData = $this->task->data();
+
+    //     $params = [
+    //         'table' => $tableData,
+    //         'model' => $this->task
+    //     ];
+
+    //     return $this->render('tasks', $params);
+    // }
 }

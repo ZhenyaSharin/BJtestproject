@@ -17,9 +17,15 @@ class User extends DbModel
     {
         return "Users";
     }
+
+    public function primaryKey(): string
+    {
+        return "id";
+    }
+
     public function attributes(): array
     {
-        return ['Id', 'Login', 'Password', 'Created_at'];
+        return ['id', 'login', 'password', 'createdAt'];
     }
 
     public function rules():array

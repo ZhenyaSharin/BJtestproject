@@ -11,13 +11,7 @@ abstract class DbModel extends Model
 
     abstract public function attributes(): array;
 
-    // public function save()
-    // {
-    //     $tableName = $this->tableName();
-    //     $attributes = $this->attributes();
-
-    //     // Application::$app->db->pdo;
-    // }
+    abstract public function primaryKey(): string;
 
     public function prepare($query)
     {
@@ -26,15 +20,18 @@ abstract class DbModel extends Model
 
     public function findOne($data) //assoc
     {
-        print_r($data);
-        $tableName = static::tableName();
-        $stmt = self::prepare('SELECT * FROM "LoginUser"(:login)');
-        $stmt->bindValue(":login", $data['login']);
-        $stmt->execute();
+        // $tableName = static::tableName();
+        if (array_key_exists('login', $data)) {
+            $stmt = self::prepare('SELECT * FROM "LoginUser"(:login)');
+            $stmt->bindValue(":login", $data['login']);
+                    $stmt->execute();
         $result = $stmt->fetchObject(static::class);
-        echo "<pre>";
-        var_dump($result);
-        echo "</pre>";
+        } else {
+            $stmt = self::prepare('SELECT * FROM "GetUserById"(:id)');
+            $stmt->bindValue(":id", $data['id']);
+                    $stmt->execute();
+        $result = $stmt->fetchObject(static::class);
+        }
         return $result;
     }
 } 

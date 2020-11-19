@@ -9,9 +9,9 @@ use App\core\Application;
 class Tasks extends Model
 {
     // public int $id;
-    public string $name;
-    public string $email;
-    public string $text;
+    public string $name = '';
+    public string $email = '';
+    public string $text = '';
     // public string $createdAt;
     // public string $removed;
     // public string $updated;
@@ -19,15 +19,31 @@ class Tasks extends Model
 
     public function data()
     {
-        // try {
+        try {
             $db = Application::$app->db;
             $stmt = $db->pdo->prepare('SELECT * FROM "GetAllTasks"()');
             $stmt->execute();
             $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
-        // } catch {
-        //     echo "Database Error";
-        // }
+        } catch (PDOException $e) {
+            echo "Database Error";
+        }
+    }
+
+    public function addNewTask($data)
+    {
+        try {
+            $db = Application::$app->db;
+            $stmt = $db->pdo->prepare('SELECT * FROM "AddNewTask"(:name, :email, :txt)');
+            $stmt->bindValue(":name", $data['name']);
+            $stmt->bindValue(":email", $data['email']);
+            $stmt->bindValue(":txt", $data['text']);
+            $stmt->execute();
+            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            echo "Database Error";
+        }
     }
 
     public function rules():array

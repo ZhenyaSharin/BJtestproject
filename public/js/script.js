@@ -14,5 +14,6 @@ $(document).ready(function() {
         });
     // };
     // dTables();
+    $('#task-table_length').css('display', 'none');
 
 });

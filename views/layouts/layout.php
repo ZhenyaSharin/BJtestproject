@@ -38,12 +38,24 @@ use App\core\Application;
                     <a class="navbar-brand" href="/">
                         Tasks
                     </a>
-                    
+                    <?php if (Application::isGuest()) :?>
                     <form class="form-inline my-2 my-lg-0">
                         <a href="/login" class="btn btn-outline-success my-2 my-sm-0">
                             Login
                         </a>
                     </form>
+                    <?php else :?>
+                    <form class="form-inline my-2 my-lg-0">
+                        <a href="/logout" class="btn btn-outline-success my-2 my-sm-0">
+                            Logout
+                        </a>
+                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ml-4">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin">Admin Page</a>
+                            </li>
+                        </ul>
+                    </form>
+                    <?php endif ;?>
                 </div>
             </nav>
         </header>

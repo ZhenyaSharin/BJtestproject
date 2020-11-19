@@ -18,21 +18,22 @@ class Login extends Model
         if (!$user) {
             $this->addError("login", "User does not exist with this login");
             return false;
-        } if (!password_verify($this->password, $user->password)) {
+        } 
+        if (!password_verify($this->password, $user->password)) {
             $this->addError('password', 'Password is incorrect. Please, try again...');
             return false;
         }
-        echo "<pre>";
-        var_dump($user->password);    
-        echo "</pre>";
-        // return Application::$app->login($user);
+        // echo "<pre>";
+        // var_dump($user);    
+        // echo "</pre>";
+        return Application::$app->login($user);
     }
 
     public function rules():array
     {
         return [
             "login" => [self::RULE_REQUIRED],
-            "password" => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 3], [self::RULE_MAX, 'max' => 24]]
+            "password" => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 2], [self::RULE_MAX, 'max' => 24]]
         ];
     }
 

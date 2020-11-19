@@ -6,31 +6,33 @@ use App\core\Controller;
 use App\core\Request;
 use App\core\Response;
 use App\models\Login;
+use App\core\Application;
 
 
 class AuthController extends Controller
 {
     public function login(Request $request, Response $response)
     {
-        $loginModel = new Login();
+        $login = new Login();
         if ($request->isPost()) {
-            $loginModel->loadData($request->getBody());
-            if ($loginModel->validate() && $loginModel->login()) {
-                $response->redirect('/');
-                // Application::$app->session->setFlash("success", "You're logged in");
+            $login->loadData($request->getBody());
+            if ($login->validate() && $login->login()) {
+                $response->redirect('/admin');
                 return; 
             } 
+
         }
 
-        // $this->setLayout('login');
-
         return $this->render('login', [
-            'model' => $loginModel
+            'model' => $login
         ]);
     }
 
-    public function register(Request $request)
+
+
+    public function logout(Request $request, Response $response)
     {
-        return $this->render('register');
+        Application::$app->logout();
+        $response->redirect('/');
     }
 }
