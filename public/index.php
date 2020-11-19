@@ -31,7 +31,7 @@ $app->router->get('/', [TaskController::class, 'index']);
 
 $app->router->get('/login', [AuthController::class, 'login']);
 
-$app->router->get('/admin', [AdminController::class, 'index']);
+$app->router->get('/admin', [AdminController::class, 'admin']);
 
 $app->router->post('/tasks', [TaskController::class, 'index']);
 

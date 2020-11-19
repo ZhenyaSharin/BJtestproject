@@ -4,18 +4,13 @@ namespace App\models;
 
 use App\core\Model;
 use App\core\Application;
-
+use App\core\exceptions\DatabaseException;
 
 class Tasks extends Model
 {
-    // public int $id;
     public string $name = '';
     public string $email = '';
     public string $text = '';
-    // public string $createdAt;
-    // public string $removed;
-    // public string $updated;
-    // public string $completed;
 
     public function data()
     {
@@ -26,7 +21,7 @@ class Tasks extends Model
             $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
         } catch (PDOException $e) {
-            echo "Database Error";
+            throw DatabaseException();
         }
     }
 
@@ -42,18 +37,16 @@ class Tasks extends Model
             $result = $stmt->fetch(\PDO::FETCH_ASSOC);
             return $result;
         } catch (PDOException $e) {
-            echo "Database Error";
+            throw new DatabaseException();
         }
     }
 
     public function rules():array
     {
         return [
-            // "id" => [self::RULE_REQUIRED],
             "name" => [self::RULE_REQUIRED],
             "email" => [self::RULE_REQUIRED, self::RULE_EMAIL],
-            "text" => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 3], [self::RULE_MAX, 'max' => 255]],
-            // "createdAt" => [self::RULE_REQUIRED]
+            "text" => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 3], [self::RULE_MAX, 'max' => 255]]
         ];
     }
 }

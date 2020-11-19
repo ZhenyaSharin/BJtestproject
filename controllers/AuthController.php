@@ -7,10 +7,12 @@ use App\core\Request;
 use App\core\Response;
 use App\models\Login;
 use App\core\Application;
+use App\core\middlewares\AuthMiddleware;
 
 
 class AuthController extends Controller
 {
+
     public function login(Request $request, Response $response)
     {
         $login = new Login();
@@ -27,7 +29,6 @@ class AuthController extends Controller
             'model' => $login
         ]);
     }
-
 
 
     public function logout(Request $request, Response $response)

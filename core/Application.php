@@ -14,6 +14,7 @@ class Application
 {
     public static string $ROOT_DIR;
 
+    public string $layout = 'layout';
     public string $userClass;
     public $router;
     public $request;
@@ -23,7 +24,7 @@ class Application
     public ?DbModel $user;
 
     public static $app;
-    public $controller;
+    public ?Controller $controller = null;
 
 
     public function __construct($rootPath, array $config)
@@ -44,11 +45,6 @@ class Application
         } else {
             $this->user = null;
         }
-    }
-
-    public function run()
-    {
-        echo $this->router->resolve();
     }
 
     public function getController()
@@ -79,5 +75,17 @@ class Application
     public static function isGuest()
     {
         return !self::$app->user;
+    }
+
+    public function run()
+    {
+        try {
+            echo $this->router->resolve();
+        } catch (\Exception $e) {
+            $this->response->setStatusCode($e->getCode());
+            echo $this->router->renderView('layouts/_error', [
+                'exception' => $e
+            ]);
+        }
     }
 }
