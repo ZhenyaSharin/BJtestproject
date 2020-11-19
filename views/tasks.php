@@ -6,11 +6,6 @@
                    Tasks table 
                 </h3>
                 <br>
-                <?php if ($status === 'success'):?>
-                <div class="alert alert-success" role="alert">
-                    New task added successfully!
-                </div>
-                <?php endif ;?>
                 <table class="table table-striped display table-bordered" id="task-table">
                     <thead>
                         <tr>
