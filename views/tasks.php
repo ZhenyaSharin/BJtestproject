@@ -1,3 +1,11 @@
+<?php
+
+use App\core\Application;
+
+$this->title = 'Tasks';
+
+?>
+
 <div class="row">
     <div class="col-12">
         <div class="row">
@@ -5,6 +13,7 @@
                 <h3>
                    Tasks table 
                 </h3>
+                <!-- Application::$app->session->setFlash('success' -->
                 <br>
                 <table class="table table-striped display table-bordered" id="task-table">
                     <thead>
@@ -17,20 +26,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($params['table'] as $item) :?>
-                        <tr>
-                            <th scope="row"><?php echo($item['Id']);?></th>
-                            <td><?php echo($item['Name']);?></td>
-                            <td><?php echo($item['Email']);?></td>
-                            <td><?php echo($item['Text']);?></td>
-                            <!-- <td class="td-center">Completed</td> -->
-                            <?php if (empty($item['Completed'])) :?>
-                            <td>Not completed</td>
-                            <?php else :?>
-                            <td class="td-center td-completed">Completed</td>
-                            <?php endif ;?>
-                        </tr>
-                        <?php endforeach;?>
+                        <?php if (!empty($params['table'])) :?>
+                            <?php foreach ($params['table'] as $item) :?>
+                            <tr>
+                                <th scope="row"><?php echo($item['Id']);?></th>
+                                <td><?php echo($item['Name']);?></td>
+                                <td><?php echo($item['Email']);?></td>
+                                <td><?php echo($item['Text']);?></td>
+                                <!-- <td class="td-center">Completed</td> -->
+                                <?php if (empty($item['Completed'])) :?>
+                                <td>Not completed</td>
+                                <?php else :?>
+                                <td class="td-center td-completed">Completed</td>
+                                <?php endif ;?>
+                            </tr>
+                            <?php endforeach;?>
+                        <?php else :?>
+                            <tr>
+                                <td colspan="5" class="td-completed td-center">
+                                    Empty task list...
+                                </td>
+                            </tr>
+                        <?php endif ;?>
                     </tbody>
                 </table>
             </div>

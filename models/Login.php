@@ -23,9 +23,6 @@ class Login extends Model
             $this->addError('password', 'Password is incorrect. Please, try again...');
             return false;
         }
-        // echo "<pre>";
-        // var_dump($user);    
-        // echo "</pre>";
         return Application::$app->login($user);
     }
 
@@ -37,11 +34,4 @@ class Login extends Model
         ];
     }
 
-    // public function labels()
-    // {
-    //     return [
-    //         'login' => 'Login',
-    //         'password' => 'Password'
-    //     ];
-    // }
 }

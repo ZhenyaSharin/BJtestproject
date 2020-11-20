@@ -7,9 +7,6 @@ use App\core\Application;
 
 abstract class DbModel extends Model 
 {
-    abstract public function tableName(): string;
-
-    abstract public function attributes(): array;
 
     abstract public function primaryKey(): string;
 
@@ -20,17 +17,16 @@ abstract class DbModel extends Model
 
     public function findOne($data) //assoc
     {
-        // $tableName = static::tableName();
         if (array_key_exists('login', $data)) {
             $stmt = self::prepare('SELECT * FROM "LoginUser"(:login)');
             $stmt->bindValue(":login", $data['login']);
-                    $stmt->execute();
-        $result = $stmt->fetchObject(static::class);
+            $stmt->execute();
+            $result = $stmt->fetchObject(static::class);
         } else {
             $stmt = self::prepare('SELECT * FROM "GetUserById"(:id)');
             $stmt->bindValue(":id", $data['id']);
-                    $stmt->execute();
-        $result = $stmt->fetchObject(static::class);
+            $stmt->execute();
+            $result = $stmt->fetchObject(static::class);
         }
         return $result;
     }

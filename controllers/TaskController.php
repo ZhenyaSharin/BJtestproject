@@ -8,26 +8,28 @@ use App\core\Request;
 use App\core\Response;
 use App\models\Tasks;
 
+
 class TaskController extends Controller
 {
-    public $task;
+    public $tasks;
+
     public function index(Request $request, Response $response)
     {
-        $this->task = new Tasks();
+        $this->tasks = new Tasks();
 
-        $tableData = $this->task->data();
+        $tableData = $this->tasks->data();
 
         $params = [
             'table' => $tableData,
-            'model' => $this->task
+            'model' => $this->tasks
         ];
 
         if ($request->isPost()) {
-            $this->task->loadData($request->getBody());
-            if (($this->task->validate()) && ($this->task->data())) {
-                $this->task->addNewTask($request->getBody());
-                $response->redirect('/');
-                return; 
+            $this->tasks->loadData($request->getBody());
+            if (($this->tasks->validate()) && ($this->tasks->data())) {
+                $this->tasks->addNewTask($request->getBody());
+                Application::$app->session->setFlash('success', 'New task has been added successfully!');
+                return $response->redirect('/');
             } 
         }
 

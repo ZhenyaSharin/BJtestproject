@@ -1,3 +1,8 @@
+<?php
+
+$this->title = 'Admin page';
+
+?>
 <div class="row">
     <div class="col-12">
         <div class="row">
@@ -21,83 +26,78 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($params["table"] as $item) :?>
-                        <tr class="row-point">
-                            <th scope="row"><?php echo($item["Id"]);?></th>
-                            <td><?php echo($item["Name"]);?></td>
-                            <td><?php echo($item["Email"]);?></td>
-                            <td><?php echo($item["Text"]);?></td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                        Change
-                                    </button>
-                                    <?php if (empty($item["Completed"])) :?>
-                                    <form class="m-0 p-0 mx-2" action="/completetask" method="POST">
-                                        <input type="hidden" name="Id" value="$item['Id']">
-                                        <button type="submit" class="btn btn-success btn-sm">
-                                            Complete
+                        <?php if (!empty($params['table'])) :?>
+                            <?php foreach ($params["table"] as $item) :?>
+                            <tr class="admintask-row">
+                                <th scope="row"><?php echo($item["Id"]);?></th>
+                                <td><?php echo($item["Name"]);?></td>
+                                <td><?php echo($item["Email"]);?></td>
+                                <td class="admintask-row-txt"><?php echo($item["Text"]);?></td>
+                                <td>
+                                    <div class="d-flex align-items-center task-item">
+                                        <?php if (empty($item["Completed"])) :?>
+                                        <button type="button" class="btn btn-primary btn-sm change-btn" data-toggle="modal" data-target=".bd-example-modal-lg" data-id="<?php echo($item['Id']);?>">
+                                            Change
                                         </button>
-                                    </form>
-                                    <?php else :?>
-                                    <button type="button" class="btn btn-secondary btn-sm mx-2" disabled>
-                                        Completed
-                                    </button>
-                                    <?php endif ;?>
-                                    
-                                    <?php echo(!empty($item["Updated_at"]) ? '<span class="td-updated">Updated...</span>' : '') ;?>
-                                </div>
-                            </td>
-                        </tr>
-                        <?php endforeach ;?>
-<!--                         <tr class="row-point">
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg">Change</button>
-                                <button type="button" class="btn btn-success btn-sm">Complete</button>
-                            </td>
-                        </tr>
-                        <tr class="row-point">
-                            <th scope="row">3</th>
-                            <td>Larry the Bird</td>
-                            <td>Flint</td>
-                            <td>@twitter</td>
-                            <td>
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg">Change</button>
-                                <button type="button" class="btn btn-secondary btn-sm" disabled>Completed</button>
-                            </td> -->
+                                        <form class="m-0 p-0 mx-2" action="/completetask" method="POST">
+                                            <input class="hdn-inp" type="hidden" name="id" value="<?php echo($item['Id']);?>">
+                                            <button type="submit" class="btn btn-success btn-sm">
+                                                Complete
+                                            </button>
+                                        </form>
+                                        <?php else :?>
+                                        <button type="button" class="btn btn-primary btn-sm change-btn" data-toggle="modal" data-target=".bd-example-modal-lg" data-id="<?php echo($item['Id']);?>">
+                                            Change
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-sm mx-2" disabled>
+                                            Completed
+                                        </button>
+                                        <?php endif ;?>
+                                        
+                                        <?php echo(!empty($item["Updated_at"]) ? '<span class="td-updated">Redacted by admin...</span>' : '') ;?>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php endforeach ;?>
+                        <?php else :?>
+                            <tr>
+                                <td colspan="5" class="td-completed td-center">
+                                    Empty task list...
+                                </td>
+                            </tr>
+                        <?php endif ;?>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
             <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">
-                                Change task
+                                Change task #<span id="task-id"></span>
                             </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form>
+                        <form action="/changetask" method="POST">
                             <div class="modal-body">
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="exampleFormControlInput1">Student name:</label>
                                     <input class="form-control" type="text" placeholder="Firstname Lastname" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Email address:</label>
                                     <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" disabled>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">New task's text:</label>
-                                    <textarea class="form-control <?php echo($model->hasError('name') ? 'is-invalid' : '');?>" id="exampleFormControlTextarea1" rows="4" maxlength="255" name="new_text" required></textarea>
+                                    <div class="invalid-feedback">
+                                        <?php echo $model->getFirstError('text'); ;?>
+                                    </div>
+                                    <textarea id="newtext-area" class="form-control <?php echo($model->hasError('name') ? 'is-invalid' : '');?>" id="exampleFormControlTextarea1" rows="4" maxlength="255" name="text" value="" required></textarea>
+                                    <input type="hidden" name="id" id="change-task-id">
                                 </div>
                             </div>
                             <div class="modal-footer">

@@ -13,20 +13,12 @@ class User extends DbModel
     public string $password = '';
     public string $createdAt = '';
 
-    public function tableName(): string
-    {
-        return "Users";
-    }
 
     public function primaryKey(): string
     {
         return "id";
     }
 
-    public function attributes(): array
-    {
-        return ['id', 'login', 'password', 'createdAt'];
-    }
 
     public function rules():array
     {

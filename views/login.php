@@ -1,3 +1,8 @@
+<?php
+
+$this->title = 'Login page';
+
+?>
 <div class="d-flex justify-content-center">
     <form action="/login" method="POST">
         <div class="modal-body">
