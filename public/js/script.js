@@ -1,12 +1,12 @@
 $(document).ready(function() {
     function dTables() {
         $('#task-table').DataTable({
-            columnDefs: [
-                { 
-                    "targets": [ 4 ],
-                    "orderable": false,
-                }
-            ],
+            // columnDefs: [
+            //     { 
+            //         "targets": [ 4 ],
+            //         "orderable": false,
+            //     }
+            // ],
             "pageLength": 3,
             "lengthMenu": 3,
             "info":     false,
