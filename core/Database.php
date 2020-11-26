@@ -44,7 +44,7 @@ class Database
             $this->log("applying migration $value".PHP_EOL);
             $instance->up();
             $this->log("applied migration $value".PHP_EOL);
-            $newMigrations[] = $migration;
+            $newMigrations[] = $value;
         }
 
         if (!empty($newMigrations)) {
