@@ -9,8 +9,8 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 error_reporting(E_ALL ^ E_DEPRECATED);
 
-$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
-$dotenv->load();
+// $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+// $dotenv->load();
 
 // 
 require_once __DIR__.'/../config/config.php';
